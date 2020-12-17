@@ -75,20 +75,16 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-
-        $post = Post::findOrFail($id);
-
-        return view('posts.edit',['post' => $post,'id' =>$id]);     
+        $post = DB::table('posts')->where('id', $id)->first();
+        
+        if (Auth::user()->id == $post->user_id) {
+        return view('posts.edit',['post' => $post,'id' =>$id]);
+        } 
+        else {
+        return redirect()->to('/posts');
+        }
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         $id = $request->post_id;
@@ -103,12 +99,7 @@ class PostController extends Controller
         return redirect()->to('/posts');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $post = Post::find($id);
