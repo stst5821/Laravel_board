@@ -6,8 +6,12 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">マイページ</div>
+        {{dd($images->file_name)}}
+
+        <p>{{ $images->file_name }}</p>
+
         <div class="mb-4">
-          <p>{{ Auth::user()->id }}さんの投稿一覧</p>
+          <p>{{ Auth::user()->name }}さんの投稿一覧</p>
         </div>
 
         @foreach ($posts as $post)

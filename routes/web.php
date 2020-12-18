@@ -28,3 +28,19 @@ Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
 
 Route::resource('/users', 'UserController', ['only' => ['show']]);
+
+// 画像アップロード
+
+Route::get('/form', 
+	[App\Http\Controllers\UploadImageController::class, "show"]
+	)->name("upload_form");
+
+Route::post('/upload', 
+	[App\Http\Controllers\UploadImageController::class, "upload"]
+    )->name("upload_image");
+    
+// 画像一覧
+
+Route::get('/list', 
+	[App\Http\Controllers\ImageListController::class, "show"]
+	)->name("image_list");
