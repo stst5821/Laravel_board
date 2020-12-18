@@ -21,12 +21,14 @@
             <td>
               <a href="{{ url('posts/'.$post->id) }}" class="btn btn-success">詳細</a>
               @auth
+
               @if (Auth::user()->id == $post->user_id)
               <form action="/posts/destroy/{{$post->id}}" method="POST">
                 {{ csrf_field() }}
                 <input type="submit" value="削除" class="btn btn-danger post_del_btn">
               </form>
               @endif
+
               @endauth
 
               {{-- @guest

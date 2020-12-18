@@ -75,8 +75,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        // URLパラメータから取得した記事idを使って、postsテーブルからレコードを取得して、$postに代入している。
         $post = DB::table('posts')->where('id', $id)->first();
         
+        // ログインしているユーザのidと、$postのuser_idを比較して、同じならedit画面に進む。違うならpostのindex画面にリダイレクトさせる。
+        // これをcontrollerに書いておかないと、URLに直接http://127.0.0.1:8000/posts/edit/6 と入力した場合、別のユーザーが書いた記事の編集画面に入れてしまう。
         if (Auth::user()->id == $post->user_id) {
         return view('posts.edit',['post' => $post,'id' =>$id]);
         } 

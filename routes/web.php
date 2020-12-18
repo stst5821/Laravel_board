@@ -26,3 +26,5 @@ Route::resource('/posts', 'PostController', ['only' => ['index','show','create',
 Route::get('posts/edit/{id}', 'PostController@edit');
 Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
+
+Route::resource('/users', 'UserController', ['only' => ['show']]);
