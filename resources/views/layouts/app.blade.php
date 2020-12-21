@@ -62,12 +62,19 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <!-- route('hoge')を使う場合は、web.phpでnameを書く必要がある。 -->
+                <a class="dropdown-item" href="{{ route('user_index') }}">
+                  {{ __('マイページ') }}
+                </a>
                 <a class="dropdown-item" href="{{ route('home') }}">
-                  {{ __('Home') }}
+                  {{ __('ホーム') }}
+                </a>
+                <a class="dropdown-item" href="{{ route('password.form') }}">
+                  {{ __('パスワード変更') }}
                 </a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
+                                                    document.getElementById('logout-form').submit();">
+                  {{ __('ログアウト') }}
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

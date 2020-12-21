@@ -6,6 +6,8 @@ use App\User;
 
 // ↓UserControllerでPostテーブルを触るときに、宣言しておく必要がある。
 use App\Post;
+use App\UploadImage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -17,7 +19,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::find(Auth::user()->id); // 現在ログインしているユーザーのIDを使って、userテーブルからレコードを持ってくる。
+        $uploads = UploadImage::find($user->image_id); // $userのimage_idカラムのデータを使って、uploadimageからレコードを持ってくる。
+        $auth = Auth::user();
+        
+        return view('users.index',[ 
+        'auth' => $auth,
+        "uploads" => $uploads ]);
     }
 
     /**
@@ -69,7 +77,7 @@ class UserController extends Controller
      */
     public function edit(user $user)
     {
-        //
+        
     }
 
     /**

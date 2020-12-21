@@ -19,13 +19,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Route::get('/URL', '飛ばしたい先のController@アクション名')->name('これを決めておくと、viewのリンクでこの名前を使えるようになる。');
 Route::get('/home', 'HomeController@index')->name('home');
+
+// パスワード変更
+Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
+Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
+
 
 // onlyを使うと、Postcontrollerのどのviewを表示するか指定できる。全部表示していい場合は、onlyは消していい
 Route::resource('/posts', 'PostController', ['only' => ['index','show','create','store']]);
 Route::get('posts/edit/{id}', 'PostController@edit');
 Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
+
+// ->name("user_index");を記述することで、Viewでroute('')を使うことができる。
+Route::get('/users/index', 'UserController@index')->name("user_index");
 
 Route::resource('/users', 'UserController', ['only' => ['show']]);
 

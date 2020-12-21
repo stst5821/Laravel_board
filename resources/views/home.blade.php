@@ -6,11 +6,12 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">マイページ</div>
-        {{dd($images->file_name)}}
-
-        <p>{{ $images->file_name }}</p>
 
         <div class="mb-4">
+
+          <!-- uploadimageから画像を表示させる。 -->
+          <img src="{{ Storage::url($uploads->file_path) }}" style="width:10%;" />
+
           <p>{{ Auth::user()->name }}さんの投稿一覧</p>
         </div>
 
