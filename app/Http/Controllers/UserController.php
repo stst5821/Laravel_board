@@ -19,6 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
+        
+
         $user = User::find(Auth::user()->id); // 現在ログインしているユーザーのIDを使って、userテーブルからレコードを持ってくる。
         $uploads = UploadImage::find($user->image_id); // $userのimage_idカラムのデータを使って、uploadimageからレコードを持ってくる。
         $auth = Auth::user();

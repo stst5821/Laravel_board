@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all(); //Postモデルを使って、データをDBから取得している。
+        $posts = Post::all()->sortByDesc('id'); //Postモデルを使って、データをDBから取得している。sortByDesc('カラム名')でidの大きい順に並べ替え。orderbyでは駄目なので注意。
         return view('posts.index', ['posts' => $posts]);
         // postsディレクトリのindexビューに値を返す。['viewで使える変数' => $アクションで指定した変数(2行上で指定した変数のこと)]
     }
@@ -49,7 +49,7 @@ class PostController extends Controller
 
         $post->save();
 
-       return redirect()->to('/posts');
+        return redirect()->to('/posts');
     }
 
     /**
@@ -58,6 +58,9 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
+
+    // show(Postモデル $post)なのかな？
+    // ルーティングから自動的にidを拾ってきて、Postモデルを使ってレコードを取得し、変数($post)に代入している。
     public function show(Post $post)
     {
         $usr_id = $post->user_id;
@@ -73,6 +76,8 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
+    
+    // edit(ルートパラメータが入る？/{$id}←これ)
     public function edit($id)
     {
         // URLパラメータから取得した記事idを使って、postsテーブルからレコードを取得して、$postに代入している。

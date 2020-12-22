@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
-use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\ChangePasswordRequest; // ←パスワードのハッシュ化に必要なIlluminate\Support\Facades\Hash;が書かれているので、このコントローラーでも使える。
 use Illuminate\Support\Facades\Auth;
 
 class ChangePasswordController extends Controller
@@ -13,6 +12,7 @@ class ChangePasswordController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     public function showChangePasswordForm()
@@ -25,7 +25,7 @@ class ChangePasswordController extends Controller
         //ValidationはChangePasswordRequestで処理
         //パスワード変更処理
         $user = Auth::user();
-        $user->password = bcrypt($request->get('password'));
+        $user->password = bcrypt($request->get('password')); // パスワードをハッシュする。
         
         $user->save();
 

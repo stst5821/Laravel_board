@@ -13,26 +13,18 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    // コンストラクタ。インスタンスを生成する際に自動で呼ばれるメソッド。
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    // これがメソッド。HomeContorollerクラスのメソッド。
+    // メソッドとは、それぞれのインスタンスが持つ関数のこと。
     public function index()
     {
-        // find($user->image_id)
         $user = User::find(Auth::user()->id); //idが、リクエストされた$userのidと一致するuserを取得
- 
+
         $uploads = UploadImage::find($user->image_id); // getだと全部取ってきてしまうので、1個だけの場合はfirstを使う。
 
         $posts = Post::where('user_id', $user->id) //$userによる投稿を取得 UsercontrollerでPostモデルを使うために、最初にuse App\Post;でモデルの使用を宣言しておく必要がある。

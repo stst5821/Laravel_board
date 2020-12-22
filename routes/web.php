@@ -27,8 +27,12 @@ Route::get('/password/change', 'Auth\ChangePasswordController@showChangePassword
 Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
 
 
+// 投稿ページ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
 // onlyを使うと、Postcontrollerのどのviewを表示するか指定できる。全部表示していい場合は、onlyは消していい
 Route::resource('/posts', 'PostController', ['only' => ['index','show','create','store']]);
+
 Route::get('posts/edit/{id}', 'PostController@edit');
 Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
@@ -38,7 +42,9 @@ Route::get('/users/index', 'UserController@index')->name("user_index");
 
 Route::resource('/users', 'UserController', ['only' => ['show']]);
 
-// 画像アップロード
+
+// 画像アップロード＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
 
 Route::get('/form', 
 	[App\Http\Controllers\UploadImageController::class, "show"]
