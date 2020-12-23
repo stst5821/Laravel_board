@@ -37,10 +37,18 @@ Route::get('posts/edit/{id}', 'PostController@edit');
 Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
 
+
+// ユーザーページ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
+
 // ->name("user_index");を記述することで、Viewでroute('')を使うことができる。
 Route::get('/users/index', 'UserController@index')->name("user_index");
 
 Route::resource('/users', 'UserController', ['only' => ['show']]);
+
+// ユーザー名変更
+Route::get('users/edit/{id}', 'UserController@edit');
+Route::post('users/edit', 'UserController@update');
 
 
 // 画像アップロード＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝

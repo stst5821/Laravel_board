@@ -9,6 +9,8 @@ use App\Post;
 use App\UploadImage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -19,13 +21,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        
-
         $user = User::find(Auth::user()->id); // 現在ログインしているユーザーのIDを使って、userテーブルからレコードを持ってくる。
         $uploads = UploadImage::find($user->image_id); // $userのimage_idカラムのデータを使って、uploadimageからレコードを持ってくる。
         $auth = Auth::user();
         
         return view('users.index',[ 
+        'user' => $user,
         'auth' => $auth,
         "uploads" => $uploads ]);
     }
@@ -77,9 +78,19 @@ class UserController extends Controller
      * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(user $user)
+    public function edit($id)
     {
-        
+        // URLパラメータから取得した記事idを使って、postsテーブルからレコードを取得して、$postに代入している。
+        $user = DB::table('users')->where('id', $id)->first();
+
+        // ログインしているユーザのidと、$userのuser_idを比較して、同じならedit画面に進む。違うならuser$userのindex画面にリダイレクトさせる。
+        // これをcontrollerに書いておかないと、URLに直接http://127.0.0.1:8000/user$users/edit/6 と入力した場合、別のユーザーが書いた記事の編集画面に入れてしまう。
+        if (Auth::user()->id == $user->id) {
+        return view('users.edit',['user' => $user,'id' =>$id]);
+        } 
+        else {
+        return redirect()->to('/users');
+        }
     }
 
     /**
@@ -89,9 +100,18 @@ class UserController extends Controller
      * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, user $user)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        
+        //レコードを検索
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        
+        //保存（更新）
+        $user->save();
+        
+        return redirect()->to('/users/index');
     }
 
     /**
