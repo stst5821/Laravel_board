@@ -33,9 +33,6 @@ Route::get('posts/edit/{id}', 'PostController@edit');
 Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
 
-// ユーザー編集ページver2
-Route::get('/setting', 'SettingController@index')->name('setting');
-
 
 // ユーザーページ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
@@ -45,13 +42,16 @@ Route::get('/users/index', 'UserController@index')->name("user_index");
 
 Route::resource('/users', 'UserController', ['only' => ['show']]);
 
-// ユーザー名変更
-// Route::get('users/edit/{id}', 'UserController@edit');
-// Route::post('users/edit', 'UserController@update');
+// ユーザー編集ページver2
+Route::get('/setting', 'SettingController@index')->name('setting');
 
-// ユーザー名変更 ver2
+// ユーザー名変更
 Route::get('/setting/name', 'SettingController@showChangeNameForm')->name('name.form');
 Route::post('/setting/name', 'SettingController@changeName')->name('name.change');
+
+// 画像変更
+Route::get('setting/image', 'SettingController@imageChangeForm')->name("image_form");
+Route::post('setting/image', 'SettingController@changeImage')->name("image_change");
 
 // パスワード変更
 Route::get('/setting/password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
@@ -62,7 +62,6 @@ Route::post('/setting/password', 'Auth\ChangePasswordController@ChangePassword')
 
 
 Route::get('/form', 'UploadImageController@show')->name("upload_form");
-
 Route::post('/upload', [App\Http\Controllers\UploadImageController::class, "upload"])->name("upload_image");
     
 // 画像一覧

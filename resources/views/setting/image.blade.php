@@ -5,18 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('名前変更') }}</div>
+                <div class="card-header">{{ __('画像変更') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('name.change') }}">
+                    <form method="post" action="{{ route('image_change') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('画像') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name', $auth->name) }}" required autocomplete="name">
+                                <input type="file" name="image" accept="image/png, image/jpeg">
+                                <!-- ↑acceptで、アップロードできるファイルを画像に限定している。 -->
 
                             </div>
                         </div>

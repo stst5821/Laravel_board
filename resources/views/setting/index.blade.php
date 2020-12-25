@@ -28,7 +28,7 @@
 
                         <!-- アイコン画像 -->
 
-                        <a href="{{ route('upload_form') }}"
+                        <a href="{{ route('image_form') }}"
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             <dl class="mb-0">
                                 <dt>{{ __('アイコン') }}</dt>
