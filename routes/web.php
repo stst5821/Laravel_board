@@ -57,6 +57,9 @@ Route::post('setting/image', 'SettingController@changeImage')->name("image_chang
 Route::get('/setting/password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
 Route::post('/setting/password', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
 
+// メールアドレス変更
+Route::get('/setting/email', 'SettingController@showChangeEmailForm')->name('email.form');
+Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');
 
 // 画像アップロード＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 

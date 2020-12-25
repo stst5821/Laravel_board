@@ -12,12 +12,18 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('画像') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('現在の画像') }}</label>
+                            <div class="col-md-6">
+                                <img src="{{ Storage::url($uploads->file_path) }}" style="width:15%;" />
 
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('新しい画像') }}</label>
                             <div class="col-md-6">
                                 <input type="file" name="image" accept="image/png, image/jpeg">
                                 <!-- ↑acceptで、アップロードできるファイルを画像に限定している。 -->
-
                             </div>
                         </div>
 

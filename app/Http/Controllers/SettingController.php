@@ -53,7 +53,12 @@ class SettingController extends Controller
     // 画像変更
 
     function imageChangeForm() {
-		return view("setting.image");
+        
+        $auth = Auth::user();
+        $user = User::find(Auth::user()->id); // 現在ログインしているユーザーのIDを使って、userテーブルからレコードを持ってくる。
+        $uploads = UploadImage::find($user->image_id); // $userのimage_idカラムのデータを使って、uploadimageからレコードを持ってくる。
+
+        return view('setting.image',['uploads' => $uploads]);        
 	}
 
 	function changeImage(Request $request){
