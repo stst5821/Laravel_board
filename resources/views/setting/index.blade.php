@@ -17,7 +17,7 @@
 
                         <!-- 名前 -->
 
-                        <a href="#"
+                        <a href="{{ route('name.form') }}"
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             <dl class="mb-0">
                                 <dt>{{ __('名前') }}</dt>

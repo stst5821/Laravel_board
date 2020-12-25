@@ -22,10 +22,6 @@ Auth::routes();
 // Route::get('/URL', '飛ばしたい先のController@アクション名')->name('これを決めておくと、viewのリンクでこの名前を使えるようになる。');
 Route::get('/home', 'HomeController@index')->name('home');
 
-// パスワード変更
-Route::get('/password/change', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
-Route::post('/password/change', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
-
 
 // 投稿ページ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
@@ -44,14 +40,22 @@ Route::get('/setting', 'SettingController@index')->name('setting');
 // ユーザーページ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 
-// ->name("user_index");を記述することで、Viewでroute('')を使うことができる。
+// ->name("user_index");を記述することで、Viewでroute('')を使うことができる。こうすることで、アクセスするURLを変えた際、Viewのリンク先を変える必要がなくなる。
 Route::get('/users/index', 'UserController@index')->name("user_index");
 
 Route::resource('/users', 'UserController', ['only' => ['show']]);
 
 // ユーザー名変更
-Route::get('users/edit/{id}', 'UserController@edit');
-Route::post('users/edit', 'UserController@update');
+// Route::get('users/edit/{id}', 'UserController@edit');
+// Route::post('users/edit', 'UserController@update');
+
+// ユーザー名変更 ver2
+Route::get('/setting/name', 'SettingController@showChangeNameForm')->name('name.form');
+Route::post('/setting/name', 'SettingController@changeName')->name('name.change');
+
+// パスワード変更
+Route::get('/setting/password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('password.form');
+Route::post('/setting/password', 'Auth\ChangePasswordController@ChangePassword')->name('password.change');
 
 
 // 画像アップロード＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\UploadImage;
 use App\User;
 
+use App\Http\Requests\ChangeNameRequest; // Http/Requests/ChangeNameRequest.phpを使うための宣言
+
 
 class SettingController extends Controller
 {
@@ -14,6 +16,8 @@ class SettingController extends Controller
     {
         $this->middleware('auth');
     }
+
+    // ユーザー情報一覧
 
     public function index()
     {
@@ -25,5 +29,24 @@ class SettingController extends Controller
             ['auth' => $auth,
             'uploads' => $uploads
             ]);
+    }
+
+    // 名前変更
+
+    public function showChangeNameForm()
+    {
+        $auth = Auth::user();
+        return view('setting.name', ['auth' => $auth]);
+    }
+
+    public function changeName(ChangeNameRequest $request)
+    {
+        //ValidationはChangeNameRequestで処理
+        //氏名変更処理
+        $user = Auth::user();
+        $user->name = $request->get('name');
+        $user->save();
+        //homeにリダイレクト
+        return redirect()->route('setting')->with('status', __('Your name has been changed.'));
     }
 }
