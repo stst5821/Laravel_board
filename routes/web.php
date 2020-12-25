@@ -37,6 +37,9 @@ Route::get('posts/edit/{id}', 'PostController@edit');
 Route::post('posts/edit', 'PostController@update');
 Route::post('posts/destroy/{id}', 'PostController@destroy');
 
+// ユーザー編集ページver2
+Route::get('/setting', 'SettingController@index')->name('setting');
+
 
 // ユーザーページ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
@@ -54,13 +57,9 @@ Route::post('users/edit', 'UserController@update');
 // 画像アップロード＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 
-Route::get('/form', 
-	[App\Http\Controllers\UploadImageController::class, "show"]
-	)->name("upload_form");
+Route::get('/form', 'UploadImageController@show')->name("upload_form");
 
-Route::post('/upload', 
-	[App\Http\Controllers\UploadImageController::class, "upload"]
-    )->name("upload_image");
+Route::post('/upload', [App\Http\Controllers\UploadImageController::class, "upload"])->name("upload_image");
     
 // 画像一覧
 
