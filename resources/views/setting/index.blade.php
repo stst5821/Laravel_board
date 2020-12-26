@@ -41,7 +41,7 @@
 
                         <!-- メールアドレス -->
 
-                        <a href="#"
+                        <a href="{{ route('email.form') }}"
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             <dl class="mb-0">
                                 <dt>{{ __('メールアドレス') }}</dt>
@@ -68,7 +68,7 @@
                     <div class="list-group" style="max-width:400px; margin:auto;">
 
                         <!-- ↓削除フォームをまだ作ってないので、リンク先は#にしておく。 -->
-                        <a href="#"
+                        <a href="{{ route('deactive.form') }}"
                             class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
                             <div>{{ __('アカウント削除') }}</div>
                             <div><i class="fas fa-chevron-right"></i></div>

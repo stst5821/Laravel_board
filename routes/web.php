@@ -61,6 +61,10 @@ Route::post('/setting/password', 'Auth\ChangePasswordController@ChangePassword')
 Route::get('/setting/email', 'SettingController@showChangeEmailForm')->name('email.form');
 Route::post('/setting/email', 'SettingController@changeEmail')->name('email.change');
 
+// アカウント削除（ソフトデリート）
+Route::get('/deactive', 'Auth\DeactiveController@showDeactiveForm')->name('deactive.form');
+Route::post('/deactive', 'Auth\DeactiveController@deactive')->name('deactive');
+
 // 画像アップロード＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 

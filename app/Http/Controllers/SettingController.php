@@ -8,6 +8,7 @@ use App\UploadImage;
 use App\User;
 
 use App\Http\Requests\ChangeNameRequest; // Http/Requests/ChangeNameRequest.phpを使うための宣言
+use App\Http\Requests\ChangeEmailRequest;
 
 
 class SettingController extends Controller
@@ -17,8 +18,10 @@ class SettingController extends Controller
         $this->middleware('auth');
     }
 
-    // ユーザー情報一覧
 
+    // ユーザー情報一覧========================================================================================================
+
+    
     public function index()
     {
         $auth = Auth::user();
@@ -31,7 +34,9 @@ class SettingController extends Controller
             ]);
     }
 
-    // 名前変更
+
+    // 名前変更========================================================================================================
+
 
     public function showChangeNameForm()
     {
@@ -50,7 +55,31 @@ class SettingController extends Controller
         return redirect()->route('setting')->with('status', __('Your name has been changed.'));
     }
 
-    // 画像変更
+
+    // メールアドレス変更========================================================================================================
+
+
+    public function showChangeEmailForm()
+    {
+        $auth = Auth::user();
+        return view('setting.email', ['auth' => $auth]);
+    }
+    
+    public function changeEmail(ChangeEmailRequest $request)
+    {
+        //ValidationはChangeUsernameRequestで処理
+        //メールアドレス変更処理
+        $user = Auth::user();
+        $user->email = $request->get('email');
+        $user->save();
+
+        //homeにリダイレクト
+        return redirect()->route('setting')->with('status', __('Your email address has been changed.'));
+    }
+
+
+    // 画像変更========================================================================================================
+
 
     function imageChangeForm() {
         

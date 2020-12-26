@@ -8,7 +8,6 @@
                 <div class="card-header">{{ Auth::user()->name }}さんの投稿一覧</div>
 
                 <div class="mb-4">
-
                     <!-- uploadimageから画像を表示させる。 -->
                     <img src="{{ Storage::url($uploads->file_path) }}" style="width:10%;" />
                 </div>
