@@ -16,6 +16,9 @@ class SettingController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        // メール認証していない場合、index以外は表示できないようにする。
+        $this->middleware('verified')->except('index');
+
     }
 
 

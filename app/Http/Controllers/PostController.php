@@ -10,11 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        
+        // メール認証していない場合、index以外は表示できないようにする。
+        $this->middleware('verified')->except('index');
+
+    }
+    
     public function index()
     {
         $posts = Post::all()->sortByDesc('id'); //Postモデルを使って、データをDBから取得している。sortByDesc('カラム名')でidの大きい順に並べ替え。orderbyでは駄目なので注意。

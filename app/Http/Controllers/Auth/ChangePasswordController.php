@@ -12,7 +12,9 @@ class ChangePasswordController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        
+
+        // メール認証していない場合、ページを表示できないようにする。
+        $this->middleware('verified');
     }
 
     public function showChangePasswordForm()

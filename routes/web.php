@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Route::get('/URL', '飛ばしたい先のController@アクション名')->name('これを決めておくと、viewのリンクでこの名前を使えるようになる。');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -13,52 +13,99 @@
                         {{ session('status') }}
                     </div>
                     @endif
+
+                    @if (!$auth->email_verified_at)
+                    <div class="alert alert-warning" role="alert">
+                        {{ __('Before proceeding, please check your email for a verification link.') }}
+                        {{ __('If you did not receive the email,') }}
+                        <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                            @csrf
+                            <button type="submit"
+                                class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another.') }}</button>
+                        </form>
+                    </div>
+                    @endif
+
                     <div class="list-group mb-3" style="max-width:400px; margin:auto;">
 
                         <!-- 名前 -->
 
-                        <a href="{{ route('name.form') }}"
-                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <!-- メールアドレス認証が終わったら -->
+                        <a href="{{ route('name.form') }}" @if ($auth->email_verified_at)
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center"
+                            @else
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center disabled" tabindex="-1" aria-disabled="true"
+                            @endif
+                            >
                             <dl class="mb-0">
                                 <dt>{{ __('名前') }}</dt>
                                 <dd class="mb-0">{{ $auth->name }}</dd>
                             </dl>
+                            @if ($auth->email_verified_at)
                             <div><i class="fas fa-chevron-right"></i></div>
+                            @endif
                         </a>
 
                         <!-- アイコン画像 -->
 
-                        <a href="{{ route('image_form') }}"
-                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+
+                        <a href="{{ route('image_form') }}" @if ($auth->email_verified_at)
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center"
+                            @else
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center disabled" tabindex="-1" aria-disabled="true"
+                            @endif
+                            >
                             <dl class="mb-0">
                                 <dt>{{ __('アイコン') }}</dt>
                                 <dd class="mb-0"> <img src="{{ Storage::url($uploads->file_path) }}"
                                         style="width:10%;" />
                                 </dd>
                             </dl>
+                            @if ($auth->email_verified_at)
                             <div><i class="fas fa-chevron-right"></i></div>
+                            @endif
                         </a>
 
                         <!-- メールアドレス -->
 
-                        <a href="{{ route('email.form') }}"
-                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="{{ route('email.form') }}" @if ($auth->email_verified_at)
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center"
+                            @else
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center disabled" tabindex="-1" aria-disabled="true"
+                            @endif
+                            >
                             <dl class="mb-0">
                                 <dt>{{ __('メールアドレス') }}</dt>
                                 <dd class="mb-0">{{ $auth->email }}</dd>
                             </dl>
+                            @if ($auth->email_verified_at)
                             <div><i class="fas fa-chevron-right"></i></div>
+                            @endif
                         </a>
 
                         <!-- パスワード -->
 
-                        <a href="{{ route('password.form') }}"
-                            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <a href="{{ route('password.form') }}" @if ($auth->email_verified_at)
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center"
+                            @else
+                            class="list-group-item list-group-item-action d-flex justify-content-between
+                            align-items-center disabled" tabindex="-1" aria-disabled="true"
+                            @endif
+                            >
                             <dl class="mb-0">
                                 <dt>{{ __('パスワード') }}</dt>
                                 <dd class="mb-0">********</dd>
                             </dl>
+                            @if ($auth->email_verified_at)
                             <div><i class="fas fa-chevron-right"></i></div>
+                            @endif
                         </a>
 
                     </div>
