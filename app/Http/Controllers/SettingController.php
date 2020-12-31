@@ -16,8 +16,9 @@ class SettingController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // メール認証していない場合、index以外は表示できないようにする。
-        $this->middleware('verified')->except('index');
+        // メール認証していない場合、indexとメールアドレス変更フォーム以外は表示できないようにする。
+        $this->middleware('verified')->except(['index', 'showChangeEmailForm', 'changeEmail']);
+
 
     }
 
@@ -73,7 +74,15 @@ class SettingController extends Controller
         //ValidationはChangeUsernameRequestで処理
         //メールアドレス変更処理
         $user = Auth::user();
+
+        // 現在のメルアドと入力されたメルアドが同じだった場合、処理せず完了しましたと表示させる。
+        if ($user->email == $request->get('email')){
+            return redirect()->route('setting')->with('status', __('完了しました！'));
+        }
+
         $user->email = $request->get('email');
+        $user->email_verified_at = null; // メール認証をリセットして、再度認証を要求する。
+
         $user->save();
 
         //homeにリダイレクト
